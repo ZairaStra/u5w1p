@@ -46,5 +46,10 @@ public class BuildingsService {
         }
         return buildings;
     }
+
+    //per recuperare dati da db
+    public List<Building> findAllBuildings() {
+        return buildingsRepository.findAll();
+    }
 }
 

@@ -8,6 +8,8 @@ import zaitrastra.u5w1p.exceptions.AlreadyBookedException;
 import zaitrastra.u5w1p.exceptions.DuplicatedException;
 import zaitrastra.u5w1p.repositories.ReservationsRepository;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ReservationsService {
@@ -28,6 +30,11 @@ public class ReservationsService {
 
         reservationsRepository.save(reservation);
         log.info("You have correctly reserved your workstation for " + reservation.getDate());
+    }
+
+    //per recuperare dati da db
+    public List<Reservation> findAllReservations() {
+        return reservationsRepository.findAll();
     }
 
 }

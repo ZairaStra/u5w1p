@@ -40,4 +40,9 @@ public class UsersService {
             }
         }
     }
+
+    //per recuperare dati da db
+    public List<User> findAllUsers() {
+        return usersRepository.findAll();
+    }
 }
