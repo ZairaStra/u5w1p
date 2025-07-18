@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import zaitrastra.u5w1p.entities.Building;
+import zaitrastra.u5w1p.entities.Reservation;
 import zaitrastra.u5w1p.entities.User;
 import zaitrastra.u5w1p.entities.Workstation;
 import zaitrastra.u5w1p.entities.enums.WorkstationType;
@@ -14,6 +15,7 @@ import zaitrastra.u5w1p.services.ReservationsService;
 import zaitrastra.u5w1p.services.UsersService;
 import zaitrastra.u5w1p.services.WorkstationsService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class MyRunner implements CommandLineRunner {
             User user = new User(faker.harryPotter().character(), faker.harryPotter().spell(), faker.internet().emailAddress());
             newUsers.add(user);
         }
-//        usersService.saveManyUsers(newUsers);
+        usersService.saveManyUsers(newUsers);
         List<User> users = usersService.findAllUsers();
 
         //lista di edifici
@@ -58,7 +60,7 @@ public class MyRunner implements CommandLineRunner {
             Building building = new Building(faker.funnyName().name(), faker.address().fullAddress(), faker.gameOfThrones().city());
             newBuildings.add(building);
         }
-//        buildingsService.saveManyBuildings(newBuildings);
+        buildingsService.saveManyBuildings(newBuildings);
         List<Building> buildings = buildingsService.findAllBuildings();
         for (Building building : buildings) {
             System.out.println(building);
@@ -84,5 +86,9 @@ public class MyRunner implements CommandLineRunner {
         //salvo le prenotazioni una per volta
         //se non ho le workstation, che non posso salvare senza buildings, non posso salvare le prenotazioni
 
+        //risolto il problema, provo almeno a salvare una prenotazione
+        User user1 = users.get(0);
+        Reservation reservation = new Reservation(ws1, user1, LocalDate.now());
+        reservationsService.saveReservation(reservation);
     }
 }
