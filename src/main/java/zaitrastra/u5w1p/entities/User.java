@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class User {
 
@@ -26,4 +26,11 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
+    public User(String fullName, String username, String email) {
+        this.fullName = fullName;
+        this.username = username;
+
+        this.email = email;
+    }
 }

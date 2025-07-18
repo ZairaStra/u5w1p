@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class Building {
     private String name;
@@ -19,4 +19,10 @@ public class Building {
     @Setter(AccessLevel.NONE)
     @Column(name = "building_id", nullable = false)
     private Long id;
+
+    public Building(String name, String address, String city) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+    }
 }

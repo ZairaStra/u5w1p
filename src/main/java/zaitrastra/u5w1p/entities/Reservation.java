@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class Reservation {
     @Id
@@ -32,4 +32,10 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "workstation_id", nullable = false)
     private Workstation workstation;
+
+    public Reservation(Workstation workstation, User user, LocalDate date) {
+        this.workstation = workstation;
+        this.user = user;
+        this.date = date;
+    }
 }

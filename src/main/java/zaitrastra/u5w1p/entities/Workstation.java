@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class Workstation {
     private String description;
@@ -32,4 +32,12 @@ public class Workstation {
 
     @OneToMany(mappedBy = "workstation")
     private List<Reservation> reservations;
+
+    public Workstation(int maxNumbOccupants, WorkstationType workstationType, String description, Building building, List<Reservation> reservations) {
+        this.maxNumbOccupants = maxNumbOccupants;
+        this.workstationType = workstationType;
+        this.description = description;
+        this.building = building;
+        this.reservations = reservations;
+    }
 }
