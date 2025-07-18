@@ -51,6 +51,8 @@ public class MyRunner implements CommandLineRunner {
         usersService.saveManyUsers(newUsers);
         List<User> users = usersService.findAllUsers();
 
+        System.out.println(users);
+
         //lista di edifici
 
         List<Building> newBuildings = new ArrayList<>();

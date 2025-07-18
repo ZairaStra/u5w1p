@@ -2,7 +2,10 @@ package zaitrastra.u5w1p.entities;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -14,7 +17,6 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 
-@ToString
 public class Reservation {
     @Id
     @Column(name = "reservation_code", nullable = false)
@@ -37,5 +39,15 @@ public class Reservation {
         this.workstation = workstation;
         this.user = user;
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", date=" + date +
+                ", user=" + user +
+                ", workstation=" + workstation +
+                '}';
     }
 }

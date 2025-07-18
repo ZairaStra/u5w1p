@@ -1,7 +1,10 @@
 package zaitrastra.u5w1p.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -11,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 
-@ToString
+
 public class User {
 
     @Id
@@ -30,7 +33,16 @@ public class User {
     public User(String fullName, String username, String email) {
         this.fullName = fullName;
         this.username = username;
-
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
