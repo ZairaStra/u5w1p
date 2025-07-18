@@ -18,11 +18,13 @@ public class BuildingsService {
     private BuildingsRepository buildingsRepository;
 
     // salvo edificio con controllo duplicato
-    public Building saveBuilding(Building newBuilding) {
+    public void saveBuilding(Building newBuilding) {
         if (buildingsRepository.findByNameIgnoreCaseAndAddressIgnoreCase(newBuilding.getName(), newBuilding.getAddress()).isPresent()) {
             throw new DuplicatedException("Building with the same name and address already exists");
         }
-        return buildingsRepository.save(newBuilding);
+        buildingsRepository.save(newBuilding);
+
+        log.info("Building" + newBuilding.getName() + " has been saved");
     }
 
     // salvo lista di edifici con controllo duplicati e inserimento dati valido
@@ -30,9 +32,7 @@ public class BuildingsService {
         for (Building building : newBuildings) {
             try {
                 this.saveBuilding(building);
-            } catch (ValidationException exception) {
-                log.error(exception.getMessage());
-            } catch (DuplicatedException exception) {
+            } catch (ValidationException | DuplicatedException exception) {
                 log.error(exception.getMessage());
             }
         }

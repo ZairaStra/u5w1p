@@ -46,6 +46,7 @@ public class MyRunner implements CommandLineRunner {
         }
 //        usersService.saveManyUsers(newUsers);
 
+        //lista di edifici
 
         List<Building> newBuildings = new ArrayList<>();
 
@@ -53,6 +54,12 @@ public class MyRunner implements CommandLineRunner {
             Building building = new Building(faker.funnyName().name(), faker.address().fullAddress(), faker.gameOfThrones().city());
             newBuildings.add(building);
         }
-        buildingsService.saveManyBuildings(newBuildings);
+//        buildingsService.saveManyBuildings(newBuildings);
+
+        //lista di postazioni
+
+
+        //salvo le prenotazioni una per volta
+
     }
 }

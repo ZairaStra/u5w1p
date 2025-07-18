@@ -17,7 +17,7 @@ public class UsersService {
     private UsersRepository usersRepository;
 
     //salvo user con controllo duplicato
-    public User saveUser(User newUser) {
+    public void saveUser(User newUser) {
         if (usersRepository.findByUsernameIgnoreCase(newUser.getUsername()).isPresent()) {
             throw new DuplicatedException("Username not available");
         }
@@ -25,7 +25,9 @@ public class UsersService {
         if (usersRepository.findByFullNameIgnoreCaseAndEmailIgnoreCase(newUser.getFullName(), newUser.getEmail()).isPresent()) {
             throw new DuplicatedException(("You already have an account"));
         }
-        return usersRepository.save(newUser);
+        usersRepository.save(newUser);
+
+        log.info("User" + newUser.getUsername() + " has been saved");
     }
 
     //salvo lista di user con controllo duplicati e inserimento dati valido
@@ -33,9 +35,7 @@ public class UsersService {
         for (User user : newUsers) {
             try {
                 this.saveUser(user);
-            } catch (ValidationException exception) {
-                log.error(exception.getMessage());
-            } catch (DuplicatedException exception) {
+            } catch (ValidationException | DuplicatedException exception) {
                 log.error(exception.getMessage());
             }
         }
